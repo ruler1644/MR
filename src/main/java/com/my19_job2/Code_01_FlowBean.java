@@ -1,4 +1,4 @@
-package com.my08_order;
+package com.my19_job2;
 
 import org.apache.hadoop.io.Writable;
 
@@ -8,7 +8,7 @@ import java.io.IOException;
 
 /**
  * @Auther wu
- * @Date 2019/6/27  12:56
+ * @Date 2019/6/22  12:04
  */
 public class Code_01_FlowBean implements Writable {
     private long upFlow;
@@ -18,6 +18,7 @@ public class Code_01_FlowBean implements Writable {
     public Code_01_FlowBean() {
     }
 
+
     public Code_01_FlowBean(long upFlow, long downFlow) {
         this.upFlow = upFlow;
         this.downFlow = downFlow;
@@ -25,6 +26,7 @@ public class Code_01_FlowBean implements Writable {
     }
 
     @Override
+    //序列化方法，对象--->字节序列
     public void write(DataOutput out) throws IOException {
         out.writeLong(upFlow);
         out.writeLong(downFlow);
@@ -32,10 +34,11 @@ public class Code_01_FlowBean implements Writable {
     }
 
     @Override
+    //反序列化方法，字节序列--->对象
     public void readFields(DataInput in) throws IOException {
-        upFlow = in.readLong();
-        downFlow = in.readLong();
-        sumFlow = in.readLong();
+        this.upFlow = in.readLong();
+        this.downFlow = in.readLong();
+        this.sumFlow = in.readLong();
     }
 
     public String toString() {

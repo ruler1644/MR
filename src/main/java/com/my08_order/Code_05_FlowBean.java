@@ -1,6 +1,6 @@
 package com.my08_order;
 
-import org.apache.hadoop.io.Writable;
+import org.apache.hadoop.io.WritableComparable;
 
 import java.io.DataInput;
 import java.io.DataOutput;
@@ -10,18 +10,24 @@ import java.io.IOException;
  * @Auther wu
  * @Date 2019/6/27  12:56
  */
-public class Code_01_FlowBean implements Writable {
+public class Code_05_FlowBean implements WritableComparable<Code_05_FlowBean> {
     private long upFlow;
     private long downFlow;
     private long sumFlow;
 
-    public Code_01_FlowBean() {
+    public Code_05_FlowBean() {
     }
 
-    public Code_01_FlowBean(long upFlow, long downFlow) {
+    public Code_05_FlowBean(long upFlow, long downFlow) {
         this.upFlow = upFlow;
         this.downFlow = downFlow;
         this.sumFlow = upFlow + downFlow;
+    }
+
+    //按照总流量进行排序，降序
+    @Override
+    public int compareTo(Code_05_FlowBean o) {
+        return Long.compare(o.sumFlow, this.getSumFlow());
     }
 
     @Override
